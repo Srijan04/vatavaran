@@ -1,0 +1,7 @@
+h1{
+    cursor: pointer;
+}
+.count{
+    border-radius: 50%;
+    padding: 4px 12px;
+}

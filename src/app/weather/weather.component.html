@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="row gx-3">
+        <div class="col-5">
+            <div class="p-3 border border-dark h-100 position-relative">
+                <div class="d-flex pb-3 border-bottom border-dark border-2">
+                    <input [(ngModel)]="cityName" placeholder="Enter City" class="form-control" />
+                    <button class="btn py-0 fs-4" (click)="addLocation()">+</button>
+                </div>
+                <div class="my-2 border-bottom border-dark fs-14">
+                    Recent Location
+                </div>
+
+                <div class="py-2" *ngFor="let location of recentLocations; let i = index">
+                    <div class="border-bottom d-flex justify-content-between cursor-pointer" (click)="onLocationClick(location)">
+                        <p>{{ location.name }} - {{ location.temperature }}C {{location.weather}}</p>
+                        <div>
+                            <span type="button" class="mx-3" (click)="refreshWeather(location)"><span
+                                    class="material-symbols-outlined">
+                                    autorenew
+                                </span></span>
+                            <span type="button" (click)="removeLocation(i)"><span class="material-symbols-outlined">
+                                    close
+                                </span></span>
+                        </div>
+
+                    </div>
+                </div>
+                <button class="btn btn-clear position-absolute bottom-0 mb-3" (click)="clearLocations()">Clear</button>
+
+            </div>
+
+        </div>
+        <div class="col-7" *ngIf="selectedLocationList">
+            <div class="border border-dark p-3 h-100 mx-2">
+                <div class="d-flex justify-content-between mb-2">
+                    <h3>{{selectedLocation?.city.name}}</h3>
+                    <span class="material-symbols-outlined" type="button" (click)="onLocationClick(selectedLocation?.city?.coord)">
+                                    autorenew
+                                </span>
+                </div>
+                <div class="d-flex">
+                    <div class="col-4" *ngIf="selectedLocationList.weather[0].main == 'Clouds'">
+                        <img src="../../assets/cloudy.svg" width="100%">
+                    </div>
+                    <div class="col-4" *ngIf="selectedLocationList.weather[0].main == 'Rain'">
+                        <img src="../../assets/rainy-3.svg" width="100%">
+                    </div>
+                    <div class="col-4" *ngIf="selectedLocationList.weather[0].main == 'Snow'">
+                        <img src="../../assets/snowy-3.svg" width="100%">
+                    </div>
+                    <div class="col-4" *ngIf="selectedLocationList.weather[0].main == 'Clear'">
+                        <img src="../../assets/day.svg" width="100%">
+                    </div>
+
+                    <div class="col-8 d-grid">
+                        <div class="mb-2">{{selectedLocationList.main.temp}}C</div>
+                        <div class="mb-2">{{selectedLocationList.weather[0].main}}</div>
+                        <div class="mb-2">Wind: {{selectedLocationList.wind.speed}} {{selectedLocationList.wind.deg}}deg</div>
+                        <div class="mb-2">Pressure {{selectedLocationList.main.pressure}}</div>
+                    </div>
+                </div>
+
+                <div class="d-flex">
+                    <div class="mx-3 text-center" *ngFor="let data of futureForcastData">
+                        <div>{{formatDate(data.dt_txt)}}</div>
+                        <div>{{data.dt_txt | date : 'shortTime'}}</div>
+                        <div *ngIf="selectedLocationList.weather[0].main == 'Clouds'">
+                            <img src="../../assets/cloudy.svg" width="100%">
+                        </div>
+                        <div *ngIf="selectedLocationList.weather[0].main == 'Rain'">
+                            <img src="../../assets/rainy-3.svg" width="100%">
+                        </div>
+                        <div *ngIf="selectedLocationList.weather[0].main == 'Snow'">
+                            <img src="../../assets/snowy-3.svg" width="100%">
+                        </div>
+                        <div *ngIf="selectedLocationList.weather[0].main == 'Clear'">
+                            <img src="../../assets/day.svg" width="100%">
+                        </div>
+                        <div>{{data.main.temp}}C</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

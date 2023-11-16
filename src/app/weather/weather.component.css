@@ -1,0 +1,15 @@
+.btn-clear{
+    background-color: #d6d6d6;
+    border-radius: 0px;
+    padding: 3px 20px;
+    right: 18px;
+}
+.row > div{
+    height: 80vh;
+}
+.fs-14{
+    font-size: 14px;
+}
+.cursor-pointer{
+    cursor: pointer;
+}

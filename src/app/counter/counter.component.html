@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row">
+        <div class="d-flex">
+            <button class="btn btn-primary me-3" (click)="resetCounters()">Reset</button>
+            <button class="btn btn-primary" (click)="addCounter()">Add</button>
+        </div>
+
+        <div *ngFor="let counter of counters; let i = index" class="d-flex align-items-center my-3">
+            <span class="py-1 px-2 bg-primary text-white border-radius8">{{ counter.count }}</span>
+            <button class="btn btn-secondary mx-3" (click)="incrementCounter(counter)">Increment</button>
+            <button class="btn btn-secondary mx-3" (click)="decrementCounter(counter)">Decrement</button>
+            <button class="btn btn-danger mx-3" (click)="deleteCounter(i)">Delete</button>
+        </div>
+    </div>
+</div>
